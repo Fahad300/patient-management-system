@@ -1,0 +1,242 @@
+/* Header styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: var(--color-component-background);
+    border-bottom: 1px solid var(--color-border);
+    z-index: var(--z-index-header);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 var(--spacing-lg);
+    max-width: var(--content-full-width);
+    margin: 0 auto;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
+    width: var(--sidebar-width);
+    background: var(--color-white);
+    border-right: 1px solid var(--color-border);
+    transition: var(--transition-base);
+    z-index: var(--z-index-sidebar);
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+/* Main layout styles */
+.layout {
+    min-height: 100vh;
+    background: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.layout-main {
+    margin-top: var(--header-height);
+    margin-left: var(--sidebar-width);
+    transition: var(--transition-base);
+    height: calc(100vh - var(--header-height));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.layout-main.collapsed {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+.content {
+    flex: 1;
+    margin: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: var(--color-component-background);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* Update dashboard specific styles */
+.dashboard-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+}
+
+.dashboard-header {
+    flex-shrink: 0;
+}
+
+.dashboard-content {
+    flex: 1;
+    min-height: 0;
+}
+
+/* Footer styles */
+.footer {
+    background: var(--color-component-background);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.footer-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: var(--transition-base);
+    font-size: var(--font-size-sm);
+}
+
+.footer-link:hover {
+    color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+}
+
+/* Update the dark theme styles */
+[data-theme="dark"] {
+    .header-actions button {
+        color: var(--color-text-primary);
+    }
+
+    .ant-menu {
+        color: var(--color-text-primary);
+        background: var(--color-component-background);
+    }
+
+    .ant-menu-item {
+        color: var(--color-text-primary) !important;
+    }
+
+    .ant-menu-item:hover {
+        color: var(--color-primary) !important;
+    }
+
+    .ant-menu-item-selected {
+        background-color: var(--color-primary) !important;
+        
+        a, span, .anticon {
+            color: #fff !important;
+        }
+    }
+
+    /* Dashboard card styles */
+    .ant-card {
+        background-color: var(--color-component-background);
+        border: 1px solid var(--color-border);
+    }
+
+    .ant-card-body {
+        .ant-statistic-title {
+            color: var(--color-text-secondary);
+        }
+        
+        .ant-statistic-content {
+            color: var(--color-text-primary);
+        }
+    }
+}
+
+/* Add to existing styles */
+.component-loader {
+  background: var(--color-component-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+}
+
+[data-theme="dark"] {
+  .ant-skeleton {
+    .ant-skeleton-input,
+    .ant-skeleton-button {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    .ant-skeleton-avatar {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    .ant-skeleton-content .ant-skeleton-title,
+    .ant-skeleton-content .ant-skeleton-paragraph > li {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+}
+
+/* Add these styles */
+.app-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-component-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-index-modal);
+}
+
+.app-loader-text {
+  margin-top: var(--spacing-md);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+}
+
+/* Update card loader styles */
+.card-loader {
+  background: var(--color-component-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  height: 100%;
+}
