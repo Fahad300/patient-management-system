@@ -8,9 +8,8 @@ export const APP_CONFIG = {
 };
 
 export const ROUTES = {
-  dashboard: '/',
+  dashboard: '/dashboard',
   patients: '/patients',
   appointments: '/appointments',
   settings: '/settings',
-  profile: '/profile',
-}; 
+} as const; 

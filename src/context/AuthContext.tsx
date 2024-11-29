@@ -45,14 +45,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
-    // Check for stored auth token and validate it
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem('auth_token');
         if (token) {
-          // Validate token with backend
-          const user = await validateToken(token);
-          dispatch({ type: 'SET_USER', payload: user });
+          if (token === 'dev-token') {
+            // Handle development user
+            dispatch({ type: 'SET_USER', payload: DEV_USER });
+          } else {
+            // Normal token validation
+            const user = await validateToken(token);
+            dispatch({ type: 'SET_USER', payload: user });
+          }
         }
       } catch (error) {
         localStorage.removeItem('auth_token');

@@ -1,4 +1,4 @@
-export type UserRole = 'admin' | 'doctor' | 'nurse' | 'receptionist' | 'patient';
+export type UserRole = 'superAdmin' | 'admin' | 'doctor' | 'nurse' | 'receptionist' | 'patient';
 
 export interface AuthUser {
   id: string;
@@ -22,4 +22,12 @@ export interface AuthState {
   user: AuthUser | null;
   isLoading: boolean;
   error: string | null;
-} 
+}
+
+export const DEV_USER: AuthUser = {
+  id: 'dev-1',
+  email: 'dev@admin.com',
+  name: 'Super Admin',
+  role: 'superAdmin',
+  avatar: '/avatars/admin.png'
+}; 

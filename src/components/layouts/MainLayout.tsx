@@ -23,10 +23,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   }, [isDarkMode]);
 
   useEffect(() => {
-    // Simulate initial app loading
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500); // Slightly longer for app loading
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
