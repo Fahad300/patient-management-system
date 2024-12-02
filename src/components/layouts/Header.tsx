@@ -9,8 +9,12 @@ import {
   BuildOutlined,
   SettingOutlined,
   LogoutOutlined,
+  ProfileOutlined,
 } from '@ant-design/icons';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import RoleSwitcher from '@/components/common/RoleSwitcher';
+import { useAuth } from '@/context/AuthContext';
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -19,6 +23,8 @@ interface HeaderProps {
 
 const Header = ({ isDarkMode, onThemeChange }: HeaderProps) => {
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+  const { logout, user } = useAuth();
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,6 +33,22 @@ const Header = ({ isDarkMode, onThemeChange }: HeaderProps) => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const handleMenuClick = (key: string) => {
+    switch (key) {
+      case 'profile':
+        router.push('/profile');
+        break;
+      case 'settings':
+        router.push('/settings');
+        break;
+      case 'logout':
+        logout();
+        break;
+      default:
+        break;
+    }
+  };
 
   // Mock notifications
   const notifications = [
@@ -39,15 +61,30 @@ const Header = ({ isDarkMode, onThemeChange }: HeaderProps) => {
     { key: 'analytics', label: 'Analytics Dashboard' },
     { key: 'reports', label: 'Reports' },
     { key: 'billing', label: 'Billing Management' },
-    { key: 'divider', type: 'divider' as const },
+    { type: 'divider' as const },
     { key: 'settings', label: 'Enterprise Settings' },
   ];
 
   const userMenuItems = [
-    { key: 'profile', icon: <UserOutlined />, label: 'Profile' },
-    { key: 'settings', icon: <SettingOutlined />, label: 'Settings' },
-    { key: 'divider', type: 'divider' as const },
-    { key: 'logout', icon: <LogoutOutlined />, label: 'Logout' },
+    { 
+      key: 'profile', 
+      icon: <ProfileOutlined />, 
+      label: 'My Profile',
+      onClick: () => handleMenuClick('profile')
+    },
+    { 
+      key: 'settings', 
+      icon: <SettingOutlined />, 
+      label: 'Settings',
+      onClick: () => handleMenuClick('settings')
+    },
+    { type: 'divider' as const },
+    { 
+      key: 'logout', 
+      icon: <LogoutOutlined />, 
+      label: 'Logout',
+      onClick: () => handleMenuClick('logout')
+    },
   ];
 
   const notificationItems = notifications.map((notification) => ({
@@ -89,6 +126,7 @@ const Header = ({ isDarkMode, onThemeChange }: HeaderProps) => {
             </div>
           ) : (
             <>
+              <RoleSwitcher />
               <Dropdown
                 menu={{ items: enterpriseItems }}
                 placement="bottomRight"
@@ -131,10 +169,7 @@ const Header = ({ isDarkMode, onThemeChange }: HeaderProps) => {
               </Dropdown>
 
               <Dropdown 
-                menu={{ 
-                  items: userMenuItems,
-                  onClick: (info) => console.log('User menu clicked:', info.key),
-                }} 
+                menu={{ items: userMenuItems }} 
                 placement="bottomRight"
                 trigger={['click']}
               >

@@ -1,0 +1,273 @@
+/* Patient List */
+.patients-list {
+    background: var(--color-component-background);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+}
+
+.patients-container {
+    padding: var(--spacing-md);
+}
+
+.patients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.patients-search {
+    max-width: 400px;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Patient Details */
+.patient-details {
+    background: var(--color-component-background);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+}
+
+.patient-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.patient-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.patient-section-title {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.patient-allergies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+/* Patient Form */
+.patient-form {
+    margin: 0 auto;
+}
+
+.form-section {
+    background: var(--color-component-background);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+/* Dynamic Fields */
+.dynamic-field {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+.dynamic-field-content {
+    flex: 1;
+}
+
+.dynamic-field-remove {
+    margin-top: 32px;
+}
+
+@media (min-width: 768px) {
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Form Sections */
+.section-title {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.subsection-title {
+    font-size: var(--font-size-md);
+    color: var(--color-text-primary);
+    margin: var(--spacing-lg) 0 var(--spacing-md);
+}
+
+.dynamic-delete-button {
+    color: var(--color-error);
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    transition: var(--transition-base);
+    margin-top: 32px;
+}
+
+.dynamic-delete-button:hover {
+    color: var(--color-error-hover);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-section {
+        padding: var(--spacing-md);
+    }
+
+    .dynamic-delete-button {
+        margin-top: 0;
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* Filter Button Styles */
+.filter-active {
+  background-color: var(--color-primary) !important;
+  color: white !important;
+}
+
+.filter-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-error);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+/* Filter Modal Styles */
+.ant-modal-content {
+  background-color: var(--color-component-background);
+}
+
+.ant-modal-header {
+  background-color: var(--color-component-background);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.ant-modal-body {
+  padding: var(--spacing-lg);
+}
+
+.ant-modal-footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .filter-active {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+[data-theme="dark"] .ant-modal-content,
+[data-theme="dark"] .ant-modal-header {
+  background-color: var(--color-component-background);
+}
+
+/* Import Modal Styles */
+.import-help {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--color-background);
+  border-radius: var(--border-radius);
+}
+
+.import-help h4 {
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.import-help pre {
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-sm);
+  background-color: var(--color-component-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+}
+
+[data-theme="dark"] .import-help pre {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Patient Detail Modal */
+.patient-detail-modal {
+  .ant-modal-content {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ant-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+  }
+
+  .patient-detail-content {
+    height: 100%;
+  }
+
+  .patient-name {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section-content {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section-title {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .medical-history-section,
+  .emergency-contacts-section,
+  .notes-section {
+    padding: var(--spacing-md);
+  }
+
+  .ant-descriptions {
+    background: var(--color-component-background);
+  }
+
+  .ant-timeline {
+    margin-top: var(--spacing-md);
+  }
+
+  .mb-md {
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .patient-detail-modal {
+  .ant-descriptions,
+  .ant-timeline-item-content {
+    background: var(--color-component-background);
+  }
+}

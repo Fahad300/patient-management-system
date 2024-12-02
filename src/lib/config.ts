@@ -12,4 +12,8 @@ export const ROUTES = {
   patients: '/patients',
   appointments: '/appointments',
   settings: '/settings',
+  profile: '/profile',
+  login: '/login',
+  register: '/register',
+  forgotPassword: '/forgot-password',
 } as const; 

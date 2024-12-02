@@ -1,74 +1,47 @@
 "use client";
 
-import { Card, Row, Col, Statistic } from 'antd';
-import {
-  UserOutlined,
-  CalendarOutlined,
-  ClockCircleOutlined,
-} from '@ant-design/icons';
+import { useAuth } from '@/context/AuthContext';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
+import AdminStats from '@/components/dashboard/AdminStats';
+import DoctorStats from '@/components/dashboard/DoctorStats';
+import NurseStats from '@/components/dashboard/NurseStats';
+import ReceptionistStats from '@/components/dashboard/ReceptionistStats';
+import PatientStats from '@/components/dashboard/PatientStats';
 
 export default function DashboardPage() {
+  const { user } = useAuth();
+
+  const renderDashboardContent = () => {
+    switch (user?.role) {
+      case 'superAdmin':
+      case 'admin':
+        return <AdminStats />;
+      case 'doctor':
+        return <DoctorStats />;
+      case 'nurse':
+        return <NurseStats />;
+      case 'receptionist':
+        return <ReceptionistStats />;
+      case 'patient':
+        return <PatientStats />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="dashboard-container">
-      <h1 className="dashboard-header" style={{ 
-        color: 'var(--color-text-primary)',
-        fontSize: 'var(--font-size-xl)'
-      }}>
-        Dashboard
-      </h1>
-      
-      <div className="dashboard-content">
-        <Row gutter={[16, 16]}>
-          <Col xs={24} sm={8}>
-            <Card 
-              className="dashboard-card"
-              style={{ 
-                backgroundColor: 'var(--color-component-background)',
-                border: '1px solid var(--color-border)'
-              }}
-            >
-              <Statistic
-                title={<span style={{ color: 'var(--color-text-secondary)' }}>Total Patients</span>}
-                value={1250}
-                prefix={<UserOutlined style={{ color: 'var(--color-primary)' }} />}
-                valueStyle={{ color: 'var(--color-text-primary)' }}
-              />
-            </Card>
-          </Col>
-          <Col xs={24} sm={8}>
-            <Card 
-              className="dashboard-card"
-              style={{ 
-                backgroundColor: 'var(--color-component-background)',
-                border: '1px solid var(--color-border)'
-              }}
-            >
-              <Statistic
-                title={<span style={{ color: 'var(--color-text-secondary)' }}>Appointments Today</span>}
-                value={25}
-                prefix={<CalendarOutlined style={{ color: 'var(--color-primary)' }} />}
-                valueStyle={{ color: 'var(--color-text-primary)' }}
-              />
-            </Card>
-          </Col>
-          <Col xs={24} sm={8}>
-            <Card 
-              className="dashboard-card"
-              style={{ 
-                backgroundColor: 'var(--color-component-background)',
-                border: '1px solid var(--color-border)'
-              }}
-            >
-              <Statistic
-                title={<span style={{ color: 'var(--color-text-secondary)' }}>Pending Appointments</span>}
-                value={8}
-                prefix={<ClockCircleOutlined style={{ color: 'var(--color-primary)' }} />}
-                valueStyle={{ color: 'var(--color-text-primary)' }}
-              />
-            </Card>
-          </Col>
-        </Row>
+    <ProtectedRoute requiredPermission="view_dashboard">
+      <div className="dashboard-container">
+        <h1 className="dashboard-header" style={{ 
+          color: 'var(--color-text-primary)',
+          fontSize: 'var(--font-size-xl)',
+          marginBottom: 'var(--spacing-lg)'
+        }}>
+          {user?.role === 'patient' ? 'My Dashboard' : 'Dashboard'}
+        </h1>
+        
+        {renderDashboardContent()}
       </div>
-    </div>
+    </ProtectedRoute>
   );
 } 

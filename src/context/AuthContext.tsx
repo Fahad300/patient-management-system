@@ -3,12 +3,14 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { AuthState, AuthUser, LoginCredentials, SignupData } from '@/types/auth';
 import { useRouter } from 'next/navigation';
+import { TEST_USERS } from '@/lib/testUsers';
 
 interface AuthContextType extends AuthState {
   login: (credentials: LoginCredentials) => Promise<void>;
   signup: (data: SignupData) => Promise<void>;
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
+  switchRole: (user: typeof TEST_USERS[keyof typeof TEST_USERS]) => void;
 }
 
 const initialState: AuthState = {
@@ -50,8 +52,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const token = localStorage.getItem('auth_token');
         if (token) {
           if (token === 'dev-token') {
-            // Handle development user
-            dispatch({ type: 'SET_USER', payload: DEV_USER });
+            // Load development user from localStorage
+            const devUser = localStorage.getItem('dev_user');
+            if (devUser) {
+              dispatch({ type: 'SET_USER', payload: JSON.parse(devUser) });
+            } else {
+              // Fallback to superAdmin if no user stored
+              dispatch({ type: 'SET_USER', payload: TEST_USERS.superAdmin });
+            }
           } else {
             // Normal token validation
             const user = await validateToken(token);
@@ -60,6 +68,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       } catch (error) {
         localStorage.removeItem('auth_token');
+        localStorage.removeItem('dev_user');
       } finally {
         dispatch({ type: 'SET_LOADING', payload: false });
       }
@@ -113,9 +122,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = async () => {
-    localStorage.removeItem('auth_token');
-    dispatch({ type: 'LOGOUT' });
-    router.push('/login');
+    try {
+      // Clear all auth-related data from localStorage
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('dev_user');
+      
+      // Reset auth state
+      dispatch({ type: 'LOGOUT' });
+      
+      // Redirect to login page
+      router.push('/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   const resetPassword = async (email: string) => {
@@ -137,8 +156,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const switchRole = (newUser: typeof TEST_USERS[keyof typeof TEST_USERS]) => {
+    dispatch({ type: 'SET_USER', payload: newUser });
+    // Optionally store in localStorage for persistence
+    localStorage.setItem('dev_user', JSON.stringify(newUser));
+  };
+
+  const value = {
+    user: state.user,
+    isLoading: state.isLoading,
+    error: state.error,
+    login,
+    signup,
+    logout,
+    resetPassword,
+    switchRole,
+  };
+
   return (
-    <AuthContext.Provider value={{ ...state, login, signup, logout, resetPassword }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

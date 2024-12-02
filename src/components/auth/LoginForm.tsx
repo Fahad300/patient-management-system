@@ -6,7 +6,8 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import { LoginCredentials, DEV_USER } from '@/types/auth';
+import { LoginCredentials } from '@/types/auth';
+import { TEST_USERS } from '@/lib/testUsers';
 
 const LoginForm = () => {
   const { login, isLoading, error } = useAuth();
@@ -22,9 +23,21 @@ const LoginForm = () => {
   };
 
   const handleDevLogin = () => {
-    localStorage.setItem('auth_token', 'dev-token');
-    localStorage.setItem('dev_user', JSON.stringify(DEV_USER));
-    window.location.href = '/dashboard';
+    try {
+      // Set development credentials as superAdmin
+      const superAdminUser = TEST_USERS.superAdmin;
+      localStorage.setItem('auth_token', 'dev-token');
+      localStorage.setItem('dev_user', JSON.stringify(superAdminUser));
+      
+      // Show success message
+      message.success('Logged in as Super Admin');
+      
+      // Redirect to dashboard
+      window.location.href = '/dashboard';
+    } catch (error) {
+      message.error('Development login failed');
+      console.error('Dev login error:', error);
+    }
   };
 
   return (

@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Patient {
+  id               String            @id @default(cuid())
+  firstName        String
+  lastName         String
+  dateOfBirth      DateTime
+  gender           String
+  email            String            @unique
+  phone            String
+  bloodGroup       String?
+  address          Address?
+  medicalHistory   MedicalHistory[]
+  allergies        Allergy[]
+  emergencyContacts EmergencyContact[]
+  notes            String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model Address {
+  id        String   @id @default(cuid())
+  street    String
+  city      String
+  state     String
+  zipCode   String
+  patient   Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId String   @unique
+}
+
+model MedicalHistory {
+  id          String   @id @default(cuid())
+  condition   String
+  diagnosis   String
+  year        String
+  patient     Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId   String
+}
+
+model Allergy {
+  id          String   @id @default(cuid())
+  name        String
+  patient     Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId   String
+}
+
+model EmergencyContact {
+  id           String   @id @default(cuid())
+  name         String
+  relationship String
+  phone        String
+  patient      Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId    String
+} 

@@ -51,21 +51,18 @@ const Sidebar = ({ collapsed, onCollapse }: SidebarProps) => {
       key: ROUTES.settings,
       icon: <SettingOutlined />,
       label: <Link href={ROUTES.settings}>Settings</Link>,
-    },
+    }
   ];
 
   return (
     <Sider 
       collapsed={collapsed}
       onCollapse={onCollapse}
-      className={`sidebar ${collapsed ? 'collapsed' : ''}`}
+      className="sidebar"
       width={256}
-      style={{
-        backgroundColor: 'var(--color-component-background)',
-      }}
     >
       {isLoading ? (
-        <div style={{ padding: '24px 16px' }}>
+        <div className="loading-container">
           <Skeleton active paragraph={{ rows: 6 }} />
         </div>
       ) : (
@@ -73,11 +70,7 @@ const Sidebar = ({ collapsed, onCollapse }: SidebarProps) => {
           mode="inline"
           selectedKeys={[pathname]}
           items={menuItems}
-          className="h-full border-r-0"
-          style={{
-            backgroundColor: 'var(--color-component-background)',
-            borderRight: '1px solid var(--color-border)',
-          }}
+          className="sidebar-menu"
         />
       )}
     </Sider>

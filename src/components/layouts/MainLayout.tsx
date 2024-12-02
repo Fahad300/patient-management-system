@@ -45,7 +45,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         onCollapse={setCollapsed}
       />
       <main className={`layout-main ${collapsed ? 'collapsed' : ''}`}>
-        <div className="content">
+        <div className="layout-content">
           {children}
         </div>
         <Footer />
