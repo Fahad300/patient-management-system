@@ -1,116 +1,117 @@
 .auth-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-background);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-background);
 }
 
 .auth-card {
-  width: 100%;
-  max-width: 400px;
-  padding: var(--spacing-lg);
-  background-color: var(--color-component-background);
-  border-radius: var(--border-radius);
-  box-shadow: 0 2px 8px var(--color-shadow);
+    width: 100%;
+    max-width: 400px;
+    padding: var(--spacing-lg);
+    background-color: var(--color-component-background);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px var(--color-shadow);
 }
 
 .auth-logo {
-  display: flex;
-  justify-content: center;
-  margin-bottom: var(--spacing-xl);
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
 }
 
 .auth-title {
-  text-align: center;
-  font-size: var(--font-size-xl);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-lg);
+    text-align: center;
+    font-size: var(--font-size-xl);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
 }
 
 .auth-links {
-  display: flex;
-  justify-content: space-between;
-  margin-top: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-md);
 }
 
 .auth-error {
-  color: var(--color-error);
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-sm);
-  border: 1px solid var(--color-error);
-  border-radius: var(--border-radius);
-  background-color: rgba(255, 77, 79, 0.1);
+    color: var(--color-error);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    border: 1px solid var(--color-error);
+    border-radius: var(--border-radius);
+    background-color: rgba(255, 77, 79, 0.1);
 }
 
 /* Ant Design component overrides for auth pages */
 .auth-card .ant-input-affix-wrapper {
-  background-color: var(--color-component-background) !important;
-  border-color: var(--color-border) !important;
-  color: var(--color-text-primary) !important;
+    background-color: var(--color-component-background) !important;
+    border-color: var(--color-border) !important;
+    color: var(--color-text-primary) !important;
 }
 
 .auth-card .ant-input {
-  background-color: var(--color-component-background) !important;
-  color: var(--color-text-primary) !important;
+    background-color: var(--color-component-background) !important;
+    color: var(--color-text-primary) !important;
 }
 
 .auth-card .ant-input-prefix {
-  color: var(--color-icon) !important;
+    color: var(--color-icon) !important;
 }
 
-.auth-card .ant-form-item-label > label {
-  color: var(--color-text-secondary) !important;
+.auth-card .ant-form-item-label>label {
+    color: var(--color-text-secondary) !important;
 }
 
 .auth-card .ant-btn {
-  background-color: var(--color-primary) !important;
-  border-color: var(--color-primary) !important;
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
 }
 
 .auth-card .ant-btn:hover {
-  background-color: var(--color-primary-hover) !important;
-  border-color: var(--color-primary-hover) !important;
+    background-color: var(--color-primary-hover) !important;
+    border-color: var(--color-primary-hover) !important;
 }
 
 /* Dark theme specific styles */
 [data-theme="dark"] .auth-card {
-  box-shadow: 0 4px 12px var(--color-shadow);
+    box-shadow: 0 4px 12px var(--color-shadow);
 }
 
 [data-theme="dark"] .auth-card .ant-input-affix-wrapper:hover,
 [data-theme="dark"] .auth-card .ant-input-affix-wrapper:focus {
-  border-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
 }
 
 .auth-message {
-  text-align: center;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-lg);
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-lg);
 }
 
 .auth-card .ant-form-item:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .auth-card .ant-select-selector {
-  height: 40px !important;
-  padding: 4px 11px !important;
+    height: 40px !important;
+    padding: 4px 11px !important;
 }
 
 .auth-card .ant-select-selection-item {
-  line-height: 30px !important;
+    line-height: 30px !important;
 }
 
 .auth-card .ant-input-affix-wrapper {
-  padding: 8px 11px;
+    padding: 8px 11px;
 }
 
 .auth-card .ant-input-prefix {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 /* Dark theme adjustments */
 [data-theme="dark"] .auth-card {
-  background: var(--color-white);
-} 
+    background: var(--color-white);
+}

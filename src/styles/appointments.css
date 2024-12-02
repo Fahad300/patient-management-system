@@ -1,0 +1,52 @@
+.appointments-container {
+  padding: var(--spacing-md);
+}
+
+.appointments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.appointments-title {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* Tab styles */
+.ant-tabs-nav {
+  margin-bottom: var(--spacing-lg) !important;
+}
+
+.ant-tabs-tab {
+  padding: var(--spacing-md) var(--spacing-lg) !important;
+}
+
+.ant-tabs-tab .anticon {
+  margin-right: var(--spacing-sm);
+}
+
+/* Dark mode styles */
+[data-theme="dark"] {
+  .appointments-title {
+    color: var(--dark-text-primary);
+  }
+
+  .ant-tabs-tab {
+    color: var(--dark-text-secondary);
+  }
+
+  .ant-tabs-tab:hover {
+    color: var(--color-primary);
+  }
+
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: var(--color-primary);
+  }
+
+  .ant-tabs-ink-bar {
+    background: var(--color-primary);
+  }
+} 

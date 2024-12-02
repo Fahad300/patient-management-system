@@ -14,6 +14,17 @@ if (!fs.existsSync(PATIENTS_FILE)) {
   fs.writeFileSync(PATIENTS_FILE, JSON.stringify([]));
 }
 
+export interface PatientData {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  gender: string;
+  email: string;
+  phone: string;
+  bloodGroup?: string;
+  notes?: string;
+}
+
 export interface Patient extends PatientData {
   id: string;
   createdAt: string;

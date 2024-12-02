@@ -3,6 +3,7 @@
 import { Card, Tabs } from 'antd';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import '@/styles/settings.css';
+import { InitializeButton } from '@/components/admin/InitializeButton';
 
 const { TabPane } = Tabs;
 
@@ -37,6 +38,13 @@ export default function SettingsPage() {
               </TabPane>
             </Tabs>
           </Card>
+        </div>
+        <div className="settings-section">
+          <h2>Database Management</h2>
+          <div className="settings-content">
+            <p>Initialize the database with sample data</p>
+            <InitializeButton />
+          </div>
         </div>
       </div>
     </ProtectedRoute>

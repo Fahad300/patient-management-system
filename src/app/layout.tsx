@@ -6,6 +6,8 @@ import "@/styles/dashboard.css";
 import "@/styles/components.css";
 import "@/styles/patients.css";
 import "@/styles/settings.css";
+import "@/styles/appointments.css";
+import "@/styles/queue.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
