@@ -4,6 +4,7 @@ import { Card, Tabs } from 'antd';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import '@/styles/settings.css';
 import { InitializeButton } from '@/components/admin/InitializeButton';
+import RoleManagement from '@/components/admin/RoleManagement';
 
 const { TabPane } = Tabs;
 
@@ -35,6 +36,9 @@ export default function SettingsPage() {
                   Configure security and privacy settings
                 </p>
                 {/* Add security settings content */}
+              </TabPane>
+              <TabPane tab="Role Management" key="roles">
+                <RoleManagement />
               </TabPane>
             </Tabs>
           </Card>

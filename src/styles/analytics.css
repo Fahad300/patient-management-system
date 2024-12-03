@@ -1,0 +1,45 @@
+.analytics-container {
+  padding: var(--spacing-md);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.page-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+}
+
+.overview-stats {
+  margin-bottom: var(--spacing-lg);
+}
+
+.metric-card {
+  height: 100%;
+}
+
+.chart-container {
+  margin-bottom: var(--spacing-md);
+  height: 300px;
+}
+
+.performance-metric {
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  .metric-card {
+    background: var(--dark-component-background);
+  }
+
+  .page-title {
+    color: var(--dark-text-primary);
+  }
+} 

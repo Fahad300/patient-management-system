@@ -101,4 +101,22 @@ model Queue {
   endTime       DateTime?   // When consultation ended
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
-} 
+}
+
+model Role {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  description String
+  permissions Permission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Permission {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String
+  roles       Role[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -20,4 +20,5 @@ export const ROUTES = {
   billing: '/billing',
   lab: '/lab',
   telemedicine: '/telemedicine',
+  analytics: '/analytics',
 } as const; 
