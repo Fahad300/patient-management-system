@@ -1,0 +1,221 @@
+.billing-container {
+  padding: var(--spacing-md);
+}
+
+.billing-stats {
+  margin-bottom: var(--spacing-lg);
+}
+
+.billing-stats .ant-card {
+  height: 100%;
+}
+
+.billing-stats .ant-statistic-title {
+  color: var(--color-text-secondary);
+}
+
+.billing-stats .ant-statistic-content {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xl);
+}
+
+.billing-form {
+  max-width: 800px;
+}
+
+.payment-form {
+  max-width: 500px;
+}
+
+.insurance-form {
+  max-width: 600px;
+}
+
+/* Print styles for invoices */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .invoice-container {
+    padding: var(--spacing-lg);
+    background: white;
+  }
+
+  .invoice-header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .invoice-details {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .invoice-items {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .invoice-summary {
+    margin-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-md);
+  }
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  .billing-stats .ant-card {
+    background: var(--dark-component-background);
+  }
+
+  .billing-stats .ant-statistic-title {
+    color: var(--dark-text-secondary);
+  }
+
+  .billing-stats .ant-statistic-content {
+    color: var(--dark-text-primary);
+  }
+}
+
+.invoice-container {
+  padding: var(--spacing-lg);
+  background: white;
+  color: #333;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid #eee;
+}
+
+.company-info h1 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.company-info p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.invoice-details {
+  text-align: right;
+}
+
+.invoice-details h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.invoice-details table {
+  margin-left: auto;
+}
+
+.invoice-details td {
+  padding: 4px 0;
+  padding-left: var(--spacing-md);
+}
+
+.patient-info {
+  margin-bottom: var(--spacing-lg);
+}
+
+.patient-info h3 {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.patient-info p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.invoice-items table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacing-lg);
+}
+
+.invoice-items th,
+.invoice-items td {
+  padding: var(--spacing-sm);
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.invoice-items th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.invoice-summary {
+  margin-left: auto;
+  width: 300px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.invoice-summary table {
+  width: 100%;
+}
+
+.invoice-summary td {
+  padding: var(--spacing-sm) 0;
+}
+
+.invoice-summary td:last-child {
+  text-align: right;
+}
+
+.total-row {
+  font-weight: 600;
+  font-size: 1.1em;
+  border-top: 2px solid #eee;
+}
+
+.invoice-notes {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: #f9f9f9;
+  border-radius: var(--border-radius);
+}
+
+.invoice-footer {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid #eee;
+}
+
+.overdue-notice {
+  color: var(--color-error);
+  font-weight: 600;
+  margin-top: var(--spacing-md);
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .invoice-container {
+    padding: 0;
+  }
+
+  .ant-modal-header,
+  .ant-modal-footer {
+    display: none !important;
+  }
+
+  .ant-modal-content {
+    box-shadow: none !important;
+  }
+
+  .invoice-items th {
+    background-color: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+} 

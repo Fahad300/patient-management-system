@@ -83,4 +83,53 @@
     background-color: var(--dark-component-background);
     border-color: var(--dark-border);
   }
+}
+
+.admin-dashboard {
+  .statistic-card {
+    height: 100%;
+    transition: all 0.3s;
+  }
+
+  .statistic-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .ant-card {
+    border-radius: 8px;
+  }
+
+  .ant-statistic-title {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 14px;
+  }
+
+  .ant-statistic-content {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .ant-progress-text {
+    font-weight: 500;
+  }
+
+  .chart-container {
+    margin-top: 16px;
+  }
+}
+
+/* Dark mode styles */
+[data-theme="dark"] .admin-dashboard {
+  .statistic-card {
+    background: #1f1f1f;
+  }
+
+  .ant-statistic-title {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .ant-statistic-content {
+    color: rgba(255, 255, 255, 0.85);
+  }
 } 

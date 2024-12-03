@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { Table, Tag, Button, Space, Card, Statistic, message } from 'antd';
-import { ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
-import ProtectedRoute from '@/components/auth/ProtectedRoute';
-import { formatDate } from '@/lib/utils';
+import React, { useState, useEffect } from 'react';
+import { Table, Card, Tag, Button, Space, Statistic, Row, Col, Modal, Form, Input, Select } from 'antd';
+import { UserOutlined, ClockCircleOutlined, TeamOutlined } from '@ant-design/icons';
+import type { ColumnsType } from 'antd/es/table';
+import ComponentLoader from '@/components/common/ComponentLoader';
 
 interface QueueEntry {
   id: string;
@@ -19,127 +19,84 @@ interface QueueEntry {
       startTime: string;
     };
   };
-  status: string;
+  status: 'WAITING' | 'IN_CONSULTATION' | 'COMPLETED' | 'CANCELLED';
   priority: number;
   checkInTime: string;
   startTime?: string;
   endTime?: string;
+  notes?: string;
 }
 
-export default function QueuePage() {
-  const [queue, setQueue] = useState<QueueEntry[]>([]);
+const QueueManagement = () => {
   const [loading, setLoading] = useState(true);
+  const [queue, setQueue] = useState<QueueEntry[]>([]);
   const [stats, setStats] = useState({
     waiting: 0,
     inConsultation: 0,
     completed: 0,
+    averageWaitTime: '25 mins',
   });
 
-  const fetchQueue = async () => {
-    try {
-      const response = await fetch('/api/queue');
-      if (!response.ok) throw new Error('Failed to fetch queue');
-      const data = await response.json();
-      setQueue(data);
-      
-      // Update stats
-      const waiting = data.filter((entry: QueueEntry) => entry.status === 'WAITING').length;
-      const inConsultation = data.filter((entry: QueueEntry) => entry.status === 'IN_CONSULTATION').length;
-      const completed = data.filter((entry: QueueEntry) => entry.status === 'COMPLETED').length;
-      setStats({ waiting, inConsultation, completed });
-    } catch (error) {
-      console.error('Fetch error:', error);
-      message.error('Failed to fetch queue');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchQueue();
-    // Set up polling for real-time updates
-    const interval = setInterval(fetchQueue, 30000); // Poll every 30 seconds
-    return () => clearInterval(interval);
+    // Simulated API call
+    setTimeout(() => {
+      setQueue([
+        {
+          id: '1',
+          patient: {
+            id: 'p1',
+            firstName: 'John',
+            lastName: 'Doe',
+          },
+          appointment: {
+            type: 'Consultation',
+            timeSlot: {
+              startTime: '2024-03-15T09:00:00',
+            },
+          },
+          status: 'WAITING',
+          priority: 1,
+          checkInTime: '2024-03-15T08:45:00',
+        },
+        // Add more mock data
+      ]);
+      setLoading(false);
+    }, 1000);
   }, []);
 
-  const handleStatusChange = async (id: string, status: string) => {
+  const handleStatusChange = async (id: string, newStatus: QueueEntry['status']) => {
     try {
+      // API call to update status
       const response = await fetch(`/api/queue/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ status: newStatus }),
       });
 
       if (!response.ok) throw new Error('Failed to update status');
-      
-      message.success('Queue status updated');
-      fetchQueue();
+
+      // Refresh queue data
+      // fetchQueue();
     } catch (error) {
-      console.error('Update error:', error);
-      message.error('Failed to update status');
+      console.error('Status update error:', error);
     }
   };
 
-  const getStatusTag = (status: string) => {
-    const colors: Record<string, string> = {
-      WAITING: 'gold',
-      IN_CONSULTATION: 'processing',
-      COMPLETED: 'success',
-      CANCELLED: 'error',
-    };
-    return (
-      <Tag color={colors[status]}>
-        {status.replace('_', ' ')}
-      </Tag>
-    );
-  };
-
-  const columns = [
+  const columns: ColumnsType<QueueEntry> = [
     {
       title: 'Patient',
       key: 'patient',
-      render: (record: QueueEntry) => 
-        `${record.patient.firstName} ${record.patient.lastName}`,
+      render: (record: QueueEntry) => (
+        <Space direction="vertical" size="small">
+          <span>{`${record.patient.firstName} ${record.patient.lastName}`}</span>
+          <Tag>{record.appointment.type}</Tag>
+        </Space>
+      ),
     },
     {
       title: 'Check-in Time',
-      key: 'checkInTime',
-      render: (record: QueueEntry) => 
-        formatDate(record.checkInTime, 'HH:mm'),
-      sorter: (a: QueueEntry, b: QueueEntry) =>
-        new Date(a.checkInTime).getTime() - new Date(b.checkInTime).getTime(),
-    },
-    {
-      title: 'Appointment Type',
-      dataIndex: ['appointment', 'type'],
-      key: 'type',
-    },
-    {
-      title: 'Status',
-      key: 'status',
-      render: (record: QueueEntry) => (
-        <Space>
-          {getStatusTag(record.status)}
-          {record.status === 'WAITING' && (
-            <Button 
-              type="primary"
-              size="small"
-              onClick={() => handleStatusChange(record.id, 'IN_CONSULTATION')}
-            >
-              Start Consultation
-            </Button>
-          )}
-          {record.status === 'IN_CONSULTATION' && (
-            <Button 
-              type="primary"
-              size="small"
-              onClick={() => handleStatusChange(record.id, 'COMPLETED')}
-            >
-              Complete
-            </Button>
-          )}
-        </Space>
-      ),
+      dataIndex: 'checkInTime',
+      render: (time: string) => new Date(time).toLocaleTimeString(),
     },
     {
       title: 'Wait Time',
@@ -151,42 +108,112 @@ export default function QueuePage() {
         return `${diff} mins`;
       },
     },
+    {
+      title: 'Status',
+      key: 'status',
+      render: (record: QueueEntry) => {
+        const colors = {
+          WAITING: 'gold',
+          IN_CONSULTATION: 'processing',
+          COMPLETED: 'success',
+          CANCELLED: 'error',
+        };
+        return <Tag color={colors[record.status]}>{record.status.replace('_', ' ')}</Tag>;
+      },
+    },
+    {
+      title: 'Actions',
+      key: 'actions',
+      render: (record: QueueEntry) => (
+        <Space>
+          {record.status === 'WAITING' && (
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => handleStatusChange(record.id, 'IN_CONSULTATION')}
+            >
+              Start Consultation
+            </Button>
+          )}
+          {record.status === 'IN_CONSULTATION' && (
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => handleStatusChange(record.id, 'COMPLETED')}
+            >
+              Complete
+            </Button>
+          )}
+          <Button
+            danger
+            size="small"
+            onClick={() => handleStatusChange(record.id, 'CANCELLED')}
+          >
+            Cancel
+          </Button>
+        </Space>
+      ),
+    },
   ];
 
-  return (
-    <ProtectedRoute requiredPermission="view_queue">
-      <div className="queue-container">
-        <h1 className="page-title">Patient Queue</h1>
-        
-        <div className="queue-stats">
-          <Card>
-            <Space size="large">
-              <Statistic 
-                title="Waiting"
-                value={stats.waiting}
-                prefix={<ClockCircleOutlined />}
-              />
-              <Statistic
-                title="In Consultation"
-                value={stats.inConsultation}
-                prefix={<UserOutlined />}
-              />
-              <Statistic
-                title="Completed Today"
-                value={stats.completed}
-              />
-            </Space>
-          </Card>
-        </div>
+  if (loading) {
+    return <ComponentLoader type="table" />;
+  }
 
+  return (
+    <div className="queue-container">
+      <Row gutter={[16, 16]} className="queue-stats">
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Statistic
+              title="Waiting"
+              value={stats.waiting}
+              prefix={<TeamOutlined />}
+              valueStyle={{ color: '#faad14' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Statistic
+              title="In Consultation"
+              value={stats.inConsultation}
+              prefix={<UserOutlined />}
+              valueStyle={{ color: '#1890ff' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Statistic
+              title="Completed Today"
+              value={stats.completed}
+              prefix={<ClockCircleOutlined />}
+              valueStyle={{ color: '#52c41a' }}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Statistic
+              title="Average Wait Time"
+              value={stats.averageWaitTime}
+              prefix={<ClockCircleOutlined />}
+            />
+          </Card>
+        </Col>
+      </Row>
+
+      <Card title="Current Queue">
         <Table
           columns={columns}
           dataSource={queue}
           rowKey="id"
-          loading={loading}
           pagination={false}
         />
-      </div>
-    </ProtectedRoute>
+      </Card>
+    </div>
   );
-} 
+};
+
+export default QueueManagement; 

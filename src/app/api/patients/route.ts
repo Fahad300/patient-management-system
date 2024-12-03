@@ -4,24 +4,18 @@ import { prisma } from '@/lib/prisma';
 export async function GET() {
   try {
     const patients = await prisma.patient.findMany({
-      select: {
-        id: true,
-        firstName: true,
-        lastName: true,
-        gender: true,
-        email: true,
-        phone: true,
-        createdAt: true,
+      include: {
+        address: true,
+        medicalHistory: true,
+        allergies: true,
+        emergencyContacts: true,
       },
-      orderBy: {
-        createdAt: 'desc'
-      }
     });
     return NextResponse.json(patients);
   } catch (error) {
     console.error('Failed to fetch patients:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch patients' }, 
+      { error: 'Failed to fetch patients' },
       { status: 500 }
     );
   }
@@ -32,14 +26,7 @@ export async function POST(request: Request) {
     const data = await request.json();
     const patient = await prisma.patient.create({
       data: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        dateOfBirth: new Date(data.dateOfBirth),
-        gender: data.gender,
-        email: data.email,
-        phone: data.phone,
-        bloodGroup: data.bloodGroup,
-        notes: data.notes,
+        ...data,
         address: {
           create: data.address,
         },
@@ -47,7 +34,7 @@ export async function POST(request: Request) {
           create: data.medicalHistory,
         },
         allergies: {
-          create: data.allergies.map((name: string) => ({ name })),
+          create: data.allergies,
         },
         emergencyContacts: {
           create: data.emergencyContacts,
@@ -62,7 +49,10 @@ export async function POST(request: Request) {
     });
     return NextResponse.json(patient);
   } catch (error) {
-    console.error('Create patient error:', error);
-    return NextResponse.json({ error: 'Failed to create patient' }, { status: 500 });
+    console.error('Failed to create patient:', error);
+    return NextResponse.json(
+      { error: 'Failed to create patient' },
+      { status: 500 }
+    );
   }
 } 

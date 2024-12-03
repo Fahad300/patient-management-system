@@ -1,0 +1,32 @@
+.profile-container {
+  padding: var(--spacing-md);
+}
+
+.profile-avatar {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.profile-info {
+  margin-bottom: var(--spacing-lg);
+}
+
+.profile-actions {
+  margin-top: var(--spacing-lg);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+} 

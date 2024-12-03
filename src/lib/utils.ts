@@ -11,6 +11,20 @@ export const formatDate = (date: string | Date, format: string = 'YYYY-MM-DD'): 
 };
 
 /**
+ * Format a number as currency (USD)
+ * @param amount - Number to format
+ * @returns Formatted currency string
+ */
+export const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+};
+
+/**
  * Check if a date is in the past
  * @param date - Date to check
  * @returns boolean

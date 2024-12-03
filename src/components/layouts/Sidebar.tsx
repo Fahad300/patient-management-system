@@ -7,6 +7,9 @@ import {
   UserOutlined,
   CalendarOutlined,
   SettingOutlined,
+  TeamOutlined,
+  DollarOutlined,
+  ExperimentOutlined,
 } from '@ant-design/icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -48,10 +51,30 @@ const Sidebar = ({ collapsed, onCollapse }: SidebarProps) => {
       label: <Link href={ROUTES.appointments}>Appointments</Link>,
     },
     {
+      key: ROUTES.queue,
+      icon: <TeamOutlined />,
+      label: <Link href={ROUTES.queue}>Queue</Link>,
+    },
+    {
+      key: ROUTES.billing,
+      icon: <DollarOutlined />,
+      label: <Link href={ROUTES.billing}>Billing</Link>,
+    },
+    {
       key: ROUTES.settings,
       icon: <SettingOutlined />,
       label: <Link href={ROUTES.settings}>Settings</Link>,
-    }
+    },
+    {
+      key: ROUTES.profile,
+      icon: <UserOutlined />,
+      label: <Link href={ROUTES.profile}>Profile</Link>,
+    },
+    {
+      key: ROUTES.lab,
+      icon: <ExperimentOutlined />,
+      label: <Link href={ROUTES.lab}>Lab & Diagnostics</Link>,
+    },
   ];
 
   return (

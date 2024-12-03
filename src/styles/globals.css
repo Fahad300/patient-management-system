@@ -1,6 +1,7 @@
 :root {
     /* Colors */
     --color-primary: #1890ff;
+    --color-primary-hover: #226cb1;
     --color-success: #52c41a;
     --color-warning: #faad14;
     --color-error: #ff4d4f;
@@ -87,17 +88,17 @@
         color: rgba(255, 255, 255, 0.85);
     }
 
-    .ant-table-thead > tr > th {
+    .ant-table-thead>tr>th {
         background-color: #141414 !important;
         color: rgba(255, 255, 255, 0.85) !important;
         border-bottom: 1px solid #303030 !important;
     }
 
-    .ant-table-tbody > tr > td {
+    .ant-table-tbody>tr>td {
         border-bottom: 1px solid #303030;
     }
 
-    .ant-table-tbody > tr:hover > td {
+    .ant-table-tbody>tr:hover>td {
         background-color: #303030 !important;
     }
 
@@ -177,7 +178,7 @@
     }
 
     /* Form and Input Styles */
-    .ant-form-item-label > label {
+    .ant-form-item-label>label {
         color: rgba(255, 255, 255, 0.85) !important;
     }
 
@@ -349,22 +350,23 @@ body {
 
 /* Print Styles */
 @media print {
-  body * {
-    visibility: hidden;
-  }
-  
-  .print-content, .print-content * {
-    visibility: visible;
-  }
-  
-  .print-content {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
+    body * {
+        visibility: hidden;
+    }
 
-  .no-print {
-    display: none !important;
-  }
+    .print-content,
+    .print-content * {
+        visibility: visible;
+    }
+
+    .print-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    .no-print {
+        display: none !important;
+    }
 }

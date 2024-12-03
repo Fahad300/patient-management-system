@@ -54,8 +54,8 @@ model Allergy {
 }
 
 model EmergencyContact {
-  id           String   @id @default(cuid())
-  name         String
+  id          String   @id @default(cuid())
+  name        String
   relationship String
   phone        String
   patient      Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
@@ -74,38 +74,31 @@ model TimeSlot {
 }
 
 model Appointment {
-  id          String            @id @default(cuid())
-  patient     Patient           @relation(fields: [patientId], references: [id])
-  patientId   String
-  timeSlot    TimeSlot          @relation(fields: [timeSlotId], references: [id])
-  timeSlotId  String            @unique
-  status      String            @default("PENDING") // Can be: "PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"
-  type        String            // e.g., "Consultation", "Follow-up", etc.
-  notes       String?
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  queueEntry  Queue?
-}
-
-enum QueueStatus {
-  WAITING
-  IN_CONSULTATION
-  COMPLETED
-  CANCELLED
-}
-
-model Queue {
   id          String      @id @default(cuid())
   patient     Patient     @relation(fields: [patientId], references: [id])
   patientId   String
-  appointment Appointment @relation(fields: [appointmentId], references: [id])
-  appointmentId String
-  status      String      @default("WAITING") // WAITING, IN_CONSULTATION, COMPLETED, CANCELLED
-  priority    Int         @default(0) // Higher number means higher priority
+  timeSlot    TimeSlot    @relation(fields: [timeSlotId], references: [id])
+  timeSlotId  String      @unique
+  status      String      @default("PENDING") // Can be: "PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"
+  type        String      // e.g., "Consultation", "Follow-up", etc.
   notes       String?
-  checkInTime DateTime    @default(now())
-  startTime   DateTime?   // When consultation started
-  endTime     DateTime?   // When consultation ended
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+  queueEntry  Queue?
+}
+
+model Queue {
+  id            String      @id @default(cuid())
+  patient       Patient     @relation(fields: [patientId], references: [id])
+  patientId     String
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  appointmentId String      @unique
+  status        String      @default("WAITING") // WAITING, IN_CONSULTATION, COMPLETED, CANCELLED
+  priority      Int         @default(0) // Higher number means higher priority
+  notes         String?
+  checkInTime   DateTime    @default(now())
+  startTime     DateTime?   // When consultation started
+  endTime       DateTime?   // When consultation ended
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 } 

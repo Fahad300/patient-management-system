@@ -1,0 +1,44 @@
+.prescriptions-container {
+  padding: var(--spacing-md);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.page-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+}
+
+.prescription-form {
+  max-width: 800px;
+}
+
+.prescription-pdf {
+  padding: var(--spacing-lg);
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .prescription-pdf {
+    box-shadow: none;
+  }
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  .prescription-pdf {
+    background: var(--dark-component-background);
+  }
+} 
