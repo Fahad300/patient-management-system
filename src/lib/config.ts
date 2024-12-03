@@ -19,4 +19,5 @@ export const ROUTES = {
   queue: '/queue',
   billing: '/billing',
   lab: '/lab',
+  telemedicine: '/telemedicine',
 } as const; 

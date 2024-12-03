@@ -13,13 +13,16 @@
     "@ant-design/charts": "^2.2.3",
     "@ant-design/icons": "^5.5.2",
     "@prisma/client": "^6.0.1",
+    "@types/simple-peer": "^9.11.8",
     "antd": "^5.22.2",
     "axios": "^1.7.8",
     "dayjs": "^1.11.13",
     "next": "14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "recharts": "^2.14.1"
+    "recharts": "^2.14.1",
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
