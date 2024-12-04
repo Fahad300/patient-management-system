@@ -2,12 +2,12 @@
 
 A modern, full-stack patient management system built with Next.js 13, TypeScript, and Prisma. This system helps healthcare providers manage patients, appointments, billing, and more with an intuitive interface.
 
-![Dashboard Preview](public/dashboard-preview.png)
+
 
 ## 🌟 Features
 
 ### Patient Management
-- Complete patient profiles with medical history
+- Complete patient profiles with a medical history
 - Document management
 - Emergency contact information
 - Allergy and medication tracking
@@ -127,15 +127,6 @@ The application can be deployed to various platforms:
 - Docker containers
 
 Detailed deployment instructions for each platform are available in the [deployment guide](docs/deployment.md).
-
-## 🔒 Environment Variables
-
-Required environment variables:
-
-```env
-DATABASE_URL="file:./dev.db"
-NEXTAUTH_SECRET="your-secret-here"
-NEXTAUTH
 
 ## 🤝 Contributing
 
