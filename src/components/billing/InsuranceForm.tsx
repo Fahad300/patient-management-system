@@ -49,10 +49,11 @@ const InsuranceForm = ({ bill, onSubmit }: InsuranceFormProps) => {
         rules={[{ required: true, message: 'Please enter coverage percentage' }]}
       >
         <InputNumber
-          min={0}
-          max={100}
-          formatter={value => `${value}%`}
-          parser={value => value!.replace('%', '')}
+          placeholder="Coverage Percentage"
+          formatter={(value: string | undefined) => {
+            return value ? `${value}%` : '';
+          }}
+          parser={(value: string | undefined) => value!.replace('%', '')}
           style={{ width: '100%' }}
         />
       </Form.Item>
@@ -64,8 +65,11 @@ const InsuranceForm = ({ bill, onSubmit }: InsuranceFormProps) => {
       >
         <InputNumber
           min={0}
-          formatter={value => `$${value}`}
-          parser={value => value!.replace('$', '')}
+          formatter={(value: string | number | undefined) => {
+            const numberValue = typeof value === 'string' ? parseFloat(value.replace(/\$\s?|(,*)/g, '')) : 0;
+            return `$${numberValue}`;
+          }}
+          parser={(value: string | undefined) => value!.replace('$', '')}
           style={{ width: '100%' }}
         />
       </Form.Item>

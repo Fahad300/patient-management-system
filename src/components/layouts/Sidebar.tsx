@@ -12,6 +12,7 @@ import {
   ExperimentOutlined,
   VideoCameraOutlined,
   BarChartOutlined,
+  BookOutlined,
 } from '@ant-design/icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -86,6 +87,11 @@ const Sidebar = ({ collapsed, onCollapse }: SidebarProps) => {
       key: ROUTES.analytics,
       icon: <BarChartOutlined />,
       label: <Link href={ROUTES.analytics}>Analytics & Reports</Link>,
+    },
+    {
+      key: ROUTES.designGuide,
+      icon: <BookOutlined />,
+      label: <Link href={ROUTES.designGuide}>Design Guide</Link>,
     },
   ];
 

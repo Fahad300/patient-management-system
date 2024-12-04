@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { Permission, hasPermission } from '@/lib/permissions';
+import { Permission } from '@/lib/permissions';
 import { Result, Button } from 'antd';
 import { useRouter } from 'next/navigation';
 
@@ -15,11 +15,19 @@ const ProtectedRoute = ({ children, requiredPermission }: ProtectedRouteProps) =
   const { user } = useAuth();
   const router = useRouter();
 
+  console.log('Protected Route:', { user, requiredPermission });
+
   if (!user) {
-    return null; // Let the middleware handle authentication
+    return null;
   }
 
-  if (!hasPermission(user.role, requiredPermission)) {
+  if (user.role === 'superAdmin') {
+    return <>{children}</>;
+  }
+
+  const hasPermission = user.role?.permissions?.includes(requiredPermission);
+  
+  if (!hasPermission) {
     return (
       <Result
         status="403"

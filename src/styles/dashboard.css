@@ -132,4 +132,94 @@
   .ant-statistic-content {
     color: rgba(255, 255, 255, 0.85);
   }
+}
+
+.stats-row {
+  margin-bottom: var(--spacing-lg);
+}
+
+.charts-row {
+  margin-bottom: var(--spacing-lg);
+}
+
+.trend-up {
+  color: var(--color-success);
+  margin-left: var(--spacing-xs);
+}
+
+.trend-down {
+  color: var(--color-error);
+  margin-left: var(--spacing-xs);
+}
+
+/* Chart responsiveness */
+.recharts-responsive-container {
+  min-height: 300px;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] {
+  .ant-card {
+    background: var(--dark-component-background);
+  }
+
+  .ant-statistic-title {
+    color: var(--dark-text-secondary);
+  }
+
+  .ant-statistic-content {
+    color: var(--dark-text-primary);
+  }
+
+  .recharts-cartesian-grid line {
+    stroke: var(--dark-border);
+  }
+
+  .recharts-text {
+    fill: var(--dark-text-secondary);
+  }
+}
+
+/* Add or update these styles */
+.charts-row .ant-card {
+  height: 100%;
+}
+
+.recharts-wrapper {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.recharts-responsive-container {
+  min-height: 300px;
+  width: 100% !important;
+}
+
+/* Ensure chart containers have minimum height */
+.chart-container {
+  min-height: 300px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Dark mode chart styles */
+[data-theme="dark"] {
+  .recharts-cartesian-grid-horizontal line,
+  .recharts-cartesian-grid-vertical line {
+    stroke: var(--dark-border);
+  }
+
+  .recharts-text {
+    fill: var(--dark-text-secondary);
+  }
+
+  .recharts-default-tooltip {
+    background-color: var(--dark-component-background) !important;
+    border-color: var(--dark-border) !important;
+  }
+
+  .recharts-tooltip-label,
+  .recharts-tooltip-item {
+    color: var(--dark-text-primary) !important;
+  }
 } 

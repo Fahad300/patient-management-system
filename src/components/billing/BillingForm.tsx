@@ -101,8 +101,11 @@ const BillingForm = ({ onSubmit }: BillingFormProps) => {
                   <InputNumber
                     min={0}
                     placeholder="Price"
-                    formatter={value => formatCurrency(value || 0)}
-                    parser={value => value!.replace(/\$\s?|(,*)/g, '')}
+                    formatter={(value: string | number | undefined, info: { userTyping: boolean; input: string }) => {
+                      const numberValue = typeof value === 'string' ? parseFloat(value.replace(/\$\s?|(,*)/g, '')) : 0;
+                      return formatCurrency(numberValue);
+                    }}
+                    parser={(value: string | undefined) => value!.replace(/\$\s?|(,*)/g, '')}
                     onChange={calculateTotals}
                   />
                 </Form.Item>
@@ -130,7 +133,9 @@ const BillingForm = ({ onSubmit }: BillingFormProps) => {
           <Form.Item label="Subtotal" name="subtotal">
             <InputNumber
               disabled
-              formatter={value => formatCurrency(value || 0)}
+              formatter={(value: string | number | undefined, info: { userTyping: boolean; input: string }) => 
+                formatCurrency(typeof value === 'number' ? value : 0)
+              }
               style={{ width: '100%' }}
             />
           </Form.Item>
@@ -139,7 +144,9 @@ const BillingForm = ({ onSubmit }: BillingFormProps) => {
           <Form.Item label="Tax" name="tax">
             <InputNumber
               disabled
-              formatter={value => formatCurrency(value || 0)}
+              formatter={(value: string | number | undefined, info: { userTyping: boolean; input: string }) => 
+                formatCurrency(typeof value === 'number' ? value : 0)
+              }
               style={{ width: '100%' }}
             />
           </Form.Item>
@@ -148,7 +155,9 @@ const BillingForm = ({ onSubmit }: BillingFormProps) => {
           <Form.Item label="Total" name="total">
             <InputNumber
               disabled
-              formatter={value => formatCurrency(value || 0)}
+              formatter={(value: string | number | undefined, info: { userTyping: boolean; input: string }) => 
+                formatCurrency(typeof value === 'number' ? value : 0)
+              }
               style={{ width: '100%' }}
             />
           </Form.Item>

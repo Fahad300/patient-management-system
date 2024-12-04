@@ -1,0 +1,64 @@
+.design-guide-container {
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: var(--color-component-background);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
+
+.color-item {
+  text-align: center;
+}
+
+.color-box {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-sm);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-success {
+  background-color: var(--color-success);
+}
+
+.bg-warning {
+  background-color: var(--color-warning);
+}
+
+.bg-error {
+  background-color: var(--color-error);
+}
+
+.bg-background {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  .section {
+    background: var(--dark-component-background);
+    border-color: var(--dark-border);
+  }
+
+  .bg-background {
+    border-color: var(--dark-border);
+  }
+} 
